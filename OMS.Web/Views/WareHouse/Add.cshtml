@@ -1,0 +1,46 @@
+﻿
+@{
+    ViewData["Title"] = "Add";
+}
+<div class="container">
+    <div class="row">
+        <div class="portlet light form-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-green-haze bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加仓库</font></font></span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form id="AddWareHouseForm" action="/WareHouse/Add" method="post" class="form-horizontal" style="width:430px">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group vgroup">
+                        <label class="col-md-3 control-label">仓库名<span class="required" aria-required="true">*</span></label>
+                        <div class="col-md-9">
+                            <input class="form-control vinput" type="type" name="Name" id="Name" value="" placeholder="请输入仓库名称" required />
+                        </div>
+                    </div>
+                    <div class="form-group vgroup">
+                        <label class="col-md-3 control-label">仓库代码<span class="required" aria-required="true">*</span></label>
+                        <div class="col-md-9">
+                            <input class="form-control vinput" type="number" min="0" name="DistrictId" id="DistrictId" value="" placeholder="请输入仓库代码（如：1）" required />
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <input class="btn green" type="submit" name="name" value="提交" />
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script type="text/javascript">
+    $().ready(function () {
+        $('#AddWareHouseForm').$validate();
+    })
+</script>
+
+}

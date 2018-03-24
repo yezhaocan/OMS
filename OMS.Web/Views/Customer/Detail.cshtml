@@ -1,0 +1,133 @@
+﻿@model OMS.Data.Domain.Customers
+@{
+    ViewData["Title"] = "Detail";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="portlet light form-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-green-haze bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">客户详情页</font></font></span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="center-block" style="width:600px;">
+                    @using (Html.BeginForm("Detail", "Customer", FormMethod.Post, new { @id = "UpdateCustomerForm", @class = "form-horizontal", onsubmit = "ValidateForm(this)" }))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-group vgroup">
+                <label class="col-md-3 control-label">客户名称<span class="required" aria-required="true">*</span></label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Name, new { @class = "form-control vinput", @placeholder = "请输入客户名称", required = true })
+                </div>
+            </div>
+            <div class="form-group vgroup">
+                <label class="col-md-3 control-label">联系人姓名<span class="required" aria-required="true">*</span></label>
+                <div class="col-md-9 ">
+                    @Html.TextBoxFor(model => model.Contact, new { @class = "form-control vinput", @placeholder = "请输入联系人姓名（如无则填写客户名称）", required = true })
+                </div>
+            </div>
+            <div class="form-group vgroup">
+                <label class="col-md-3 control-label">客户类型<span class="required" aria-required="true">*</span></label>
+                <div class="col-md-9">
+                    @Html.DropDownList("CustomerTypeId", ViewBag.CustomerType as SelectList, "请选择", new { @class = "form-control vinput", required = true })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">联系电话</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Mobile, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">邮箱</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">描述</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Mark, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group vgroup">
+                <label class="col-md-3 control-label">价格类型<span class="required" aria-required="true">*</span></label>
+                <div class="col-md-9">
+                    @Html.DropDownList("PriceTypeId", ViewBag.PriceType as SelectList, "请选择", new { @class = "form-control vinput", required = true })
+                </div>
+            </div>
+            <div class="form-group vgroup">
+                <label class="col-md-3 control-label">折扣<span class="required" aria-required="true">*</span></label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.DisCount, new { @class = "form-control vinput", min = 0, max = 9.99, type = "number" })
+                </div>
+            </div>
+            <div class="form-group vgroup">
+                <label class="col-md-3 control-label">电子发票接收邮箱</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.CustomerEmail, new { @class = "form-control vinput", type = "email" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">发票抬头</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.Title, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">纳税人识别码</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.TaxpayerId, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">注册地址</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.RegisterAddress, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">注册电话</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.RegisterTel, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">开户银行</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.BankOfDeposit, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-3 control-label">银行帐号</label>
+                <div class="col-md-9">
+                    @Html.TextBoxFor(model => model.BankAccount, new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-3"></div>
+                <div class="col-md-9">
+                    <input class="btn green" type="submit" name="name" value="提交" />&nbsp;&nbsp;&nbsp;&nbsp;
+                    @Html.ActionLink("删除", "Del", "Customer", new { id = Model.Id }, new { @class = "btn red", onclick = "javascript:return confirm('你确定要删除？')" })
+                </div>
+            </div>
+}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/Metronic/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $("#UpdateCustomerForm").$validate();
+        })
+    </script>
+}

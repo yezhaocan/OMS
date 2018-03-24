@@ -1,0 +1,81 @@
+﻿@model List<OMS.Data.Domain.Customers>
+@{
+    ViewData["Title"] = "客户管理";
+}
+
+<div class="row">
+    <div class="col-md-12 col-sm-12">
+        <div class="portlet light form-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-user font-green-haze"></i>
+                    <span class="caption-subject font-green-haze bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">客户管理</font></font></span>
+                </div>
+                <div class="text-align-reverse">
+                    <a href="/Customer/Add/" class="btn green">添加客户 <i class="fa fa-plus"></i></a>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <div class="dataTables_wrapper no-footer">
+                    <div id="table-scrollable">
+                        <table id="CustomerDataTable" class="display table table-striped table-hover table-bordered dataTable no-footer">
+                            <thead>
+                                <tr>
+                                    <th class="sorting_asc" tabindex="0" aria-controls="CustomerDataTable" rowspan="1" colspan="1" style="width: 10%;">客户类型 </th>
+                                    <th class="sorting" tabindex="0" aria-controls="CustomerDataTable" rowspan="1" colspan="1" style="width: 20%;">客户名称</th>
+                                    <th class="sorting" tabindex="0" aria-controls="CustomerDataTable" rowspan="1" colspan="1" style="width: 20%;"> 手机号码 </th>
+                                    <th class="sorting" tabindex="0" aria-controls="CustomerDataTable" rowspan="1" colspan="1" style="width: 30%;">邮箱 </th>
+                                    <th class="sorting" tabindex="0" aria-controls="CustomerDataTable" rowspan="1" colspan="1" style="width: 10%;"> 描述 </th>
+                                    <th class="sorting" tabindex="0" aria-controls="CustomerDataTable" rowspan="1" colspan="1" style="width: 10%;"> 详情 </th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                    {
+                        <tr role="row" class="odd">
+                            <td>@Html.DisplayFor(modleitem => item.Dictionary.Value) </td>
+                            <td>@Html.DisplayFor(modleitem => item.Name)</td>
+                            <td>@Html.DisplayFor(modleitem => item.Mobile)</td>
+                            <td>@Html.DisplayFor(modelitem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelitem => item.Mark)</td>
+                            <td>
+                                @Html.ActionLink("详情", "Detail", "Customer", new { id = item.Id })
+                            </td>
+                        </tr>
+
+        }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/Metronic/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/Metronic/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script type="text/javascript">
+        $().ready(function () {
+            //$("#sample_editable_1_filter input").attr("class", "form-control input-sm input-small input-inline");
+            $('#CustomerDataTable').DataTable({
+                language: {
+                    "sLengthMenu": "显示 _MENU_ 项结果",
+                    "sSearch": "搜索：",
+                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上页",
+                        "sNext": "下页",
+                        "sLast": "末页"
+                    },
+                    "sZeroRecords": "没有匹配结果",
+                    "sInfoFiltered":"(由 _MAX_ 项结果过滤)",
+                }
+            });
+        });
+    </script>
+}

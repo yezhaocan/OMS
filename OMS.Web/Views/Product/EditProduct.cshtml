@@ -1,0 +1,143 @@
+﻿@model OMS.Data.Domain.Product
+@{
+    ViewData["Title"] = "EditProduct";
+}
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bubble font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">商品详情</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Html.BeginForm("EditProduct", "Product", FormMethod.Post, new { id = "ProductForm", @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="form-body">
+                        <div class="alert alert-danger display-hide">
+                            <button class="close" data-close="alert"></button> You have some form errors. Please check below.
+                        </div>
+                        <div class="alert alert-success display-hide">
+                            <button class="close" data-close="alert"></button> Your form validation is successful!
+                        </div>
+                        <div class="form-group  margin-top-20 vgroup">
+                            <label class="control-label col-md-3">
+                                中文名
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-4">
+                                <div class="input-icon right">
+                                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control vinput", required=true} })
+                                    @Html.EditorFor(model => model.Id, new { htmlAttributes = new { style = "display:none" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                英文名
+                            </label>
+                            <div class="col-md-4">
+                                <div class="input-icon right">
+                                    <i class="fa"></i>
+                                    @Html.EditorFor(model => model.NameEn, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group vgroup">
+                            <label class="control-label col-md-3">
+                                商品编码
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.Code, new { htmlAttributes = new { @class = "form-control vinput",required=true } })
+                            </div>
+                        </div>
+                        <div class="form-group vgroup">
+                            <label class="control-label col-md-3">
+                                商品类型
+                                <span class="required"> * </span>
+                            </label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("Type", ViewBag.Types as SelectList, "请选择", new { @class = "form-control vinput", required = true })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                国家
+                            </label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("Country", ViewBag.Country as SelectList, "请选择", new { @class = "form-control vinput" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                产区
+                            </label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("Area", ViewBag.Area as SelectList, "请选择", new { @class = "form-control vinput" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                葡萄品种
+                            </label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("Grapes", ViewBag.Grapes as SelectList, "请选择", new { @class = "form-control vinput" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                容量
+                            </label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("Capacity", ViewBag.Capacity as SelectList, "请选择", new { @class = "form-control vinput" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                包装方式
+                            </label>
+                            <div class="col-md-4">
+                                @Html.DropDownList("Packing", ViewBag.Packing as SelectList, "请选择", new { @class = "form-control vinput" })
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-md-3">
+                                年份
+                            </label>
+                            <div class="col-md-4">
+                                <div class="input-icon right">
+                                    <i class="fa"></i>
+                                    @Html.EditorFor(model => model.Year, new { htmlAttributes = new { @class = "form-control" } })
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="row">
+                            <div class="col-md-offset-3 col-md-9">
+                                <button type="submit" class="btn green">更改</button>
+                                @Html.ActionLink("删除", "DelProduct", "Product",new { Model.Id},new { @class = "btn red", onclick = "javascript:return confirm('你确定要删除？')" })
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Styles{
+    <link href="~/Metronic/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" />
+}
+@section Scripts{
+    <script src="~/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $("#ProductForm").$validate();
+        })
+    </script>
+}

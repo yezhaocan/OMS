@@ -1,0 +1,102 @@
+﻿@model IQueryable<OMS.Data.Domain.Product>
+<!-- BEGIN PAGE TITLE-->
+@*<h1 class="page-title">
+        商品列表
+    </h1>*@
+<!-- END PAGE TITLE-->
+<div class="container">
+    <div class="row">
+        <div class="portlet light bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bag font-green-haze"></i>
+                    <span class="caption-subject font-green-haze bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">商品列表</font></font></span>
+                </div>
+                <div class="text-align-reverse">
+                    <div class="btn-group">
+                        <button id="sample_editable_1_new" class="btn sbold green" onclick="javascript: window.location.href='/Product/CreatedProduct'">
+                            <font style="vertical-align: inherit;">
+                                <font style="vertical-align: inherit;">
+                                    添加新的商品
+                                </font>
+                            </font><i class="fa fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <!-- Begin: Demo Datatable 1 -->
+                <div class=" dataTable">
+                    <table id="ProductsTable" class="table table-striped table-bordered">
+                        <thead>
+                            <tr role="row">
+                                <th style="width:18%">酒款名</th>
+                                <th style="width:20%">英文名</th>
+                                <th style="width:5%">类型</th>
+                                <th style="width:5%">国家</th>
+                                <th style="width:5%">地区</th>
+                                <th style="width:7%">葡萄品种</th>
+                                <th style="width:5%">年份</th>
+                                <th style="width:5%">商品编码</th>
+                                <th style="width:5%">详情</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>@Html.DisplayFor(model => item.Name)</td>
+                                    <td>@Html.DisplayFor(model => item.NameEn)</td>
+                                    <td>@Html.DisplayFor(model => item.Type)</td>
+                                    <td>@Html.DisplayFor(model => item.Country)</td>
+                                    <td>@Html.DisplayFor(model => item.Area)</td>
+                                    <td>@Html.DisplayFor(model => item.Grapes)</td>
+                                    <td>@Html.DisplayFor(model => item.Year)</td>
+                                    <td>@Html.DisplayFor(model => item.Code)</td>
+                                    <td><a href="EditProduct?id=@item.Id">详情</a></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+                <!-- End: Demo Datatable 1 -->
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Styles{
+    <link href="~/Metronic/assets/global/plugins/DataTables-1.10.15/media/css/jquery.dataTables.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/DataTables-1.10.15/extensions/Buttons/css/buttons.bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/DataTables-1.10.15/extensions/Select/css/select.bootstrap.min.css" rel="stylesheet" />
+}
+@section Scripts
+    {
+    <script src="~/Metronic//assets//global/plugins/DataTables-1.10.15/media/js/jquery.dataTables.min.js"></script>
+    <script src="~/Metronic//assets//global/plugins/DataTables-1.10.15/media/js/dataTables.bootstrap.min.js"></script>
+    <script src="~/Metronic/assets/global/plugins/DataTables-1.10.15/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Metronic/assets/global/plugins/DataTables-1.10.15/extensions/Buttons/js/buttons.bootstrap.min.js"></script>
+    <script src="~/Metronic/assets/global/plugins/DataTables-1.10.15/extensions/Select/js/dataTables.select.min.js"></script>
+    <script>
+        $().ready(function () {
+            $("#ProductsTable").DataTable({
+                language: {
+                    "sLengthMenu": "显示 _MENU_ 项结果",
+                    "sSearch": "搜索：",
+                    "sInfo": "显示第 _START_ 至 _END_ 项结果，共 _TOTAL_ 项",
+                    "sInfoEmpty": "显示第 0 至 0 项结果，共 0 项",
+                    "oPaginate": {
+                        "sFirst": "首页",
+                        "sPrevious": "上页",
+                        "sNext": "下页",
+                        "sLast": "末页"
+                    },
+                    "sZeroRecords": "没有匹配结果",
+                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                },
+                stateSave: true,
+               
+            });
+        })
+    </script>
+}

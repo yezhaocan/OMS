@@ -1,0 +1,864 @@
+﻿@using OMS.Data.Domain;
+@model OrderModel
+@{
+    ViewData["Title"] = "添加批发销货单";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles{ 
+    <style type="text/css">
+        .form-group {
+            margin-bottom:10px;
+        }
+        .order-product {
+            height: 550px;
+            background-color: #fff;
+            margin-top: 20px;
+        }
+        .select2-container--bootstrap.select2-container--disabled .select2-selection,.form-control[disabled] {
+            cursor: text !important;
+        }
+    </style>
+}
+@* 记录订单ID，当前是否为订单创建人 *@
+<input id="orderId" value="@Model.Id" type="hidden"/>
+<input id="isCreator" type="hidden" value="@(Model.CreatedBy == workContext.CurrentUser.Id ? "true" : "false")"/>
+<div class="portlet light bg-inverse "style=" padding-bottom:30px;">
+    <div class="portlet-title">
+        <div class="caption">
+            <i class="icon-equalizer font-green-haze"></i>
+            <span class="caption-subject font-green-haze bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">添加批发销货单</font></font></span>
+            <span class="caption-helper"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Info</font></font></span>
+        </div>
+        <div class="tools">
+            <a href="" class="collapse" data-original-title="" title=""></a>
+            <a href="" class="reload" data-original-title="" title=""></a>
+        </div>
+    </div>
+    <form class="form-horizontal">
+        <div class="form-body ">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">单据编号</font></font></label>
+                        <div class="col-md-8">
+                            <input type="text" id="billNo" readonly class="form-control class-edit " value="@Model.SerialNumber">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="single" class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">客户</font></font></label>                        
+                          
+                          <div class="col-md-8 class-edit ">
+                                <select id="customer" class="form-control select2" tabindex="-1" aria-hidden="false">
+                                    @if (Model.Id == 0)
+                                    {
+                                        <option></option>
+                                    }
+                                    else
+                                    {
+                                        var Customer = Model.Customers.Where(p => p.Id == Model.CustomerId).FirstOrDefault();
+                                        if (Customer != null)
+                                        {
+                                            <option value="@Customer.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Customer.Name</font></font></option>
+                                            @(Model.Customers.Remove(Customer))
+                                        }
+                                        else
+                                        {
+                                            <option></option>
+                                        }
+                                    }
+                                    @foreach (var item in Model.Customers)
+                                    {
+                                        <option value="@item.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Name</font></font></option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">仓库</font></font></label>
+                        
+                        <div class="col-md-8 class-edit" >
+                            <select id="wareHouses" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                @if (Model.Id == 0)
+                                {
+                                    <option></option>
+                                }
+                                else
+                                {
+                                    var WareHouse = Model.WareHouses.Where(p => p.DistrictId == Model.WarehouseId).FirstOrDefault();
+                                    if (WareHouse != null)
+                                    {
+                                        <option value="@WareHouse.DistrictId"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@WareHouse.Name</font></font></option>
+                                        @(Model.WareHouses.Remove(WareHouse))
+                                    }
+                                    else
+                                    {
+                                        <option></option>
+                                    }
+                                }
+                                @foreach (var item in Model.WareHouses)
+                                {
+                                    <option value="@item.DistrictId"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Name</font></font></option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">物流方式</font></font></label>                        
+                            
+                            <div class="col-md-8 class-edit">
+                                <select id="delivery" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                    @if (Model.Id == 0)
+                                    {
+                                    <option></option>
+                                    }
+                                    else
+                                    {
+                                        var Delivery = Model.Delivery.Where(p => p.Id == Model.DeliveryTypeId).FirstOrDefault();
+                                        if (Delivery != null)
+                                        {
+                                    <option value="@Delivery.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@Delivery.Name</font></font></option>
+                                    @(Model.Delivery.Remove(Delivery))
+                                        }
+                                        else
+                                        {
+                                    <option></option>
+                                        }
+                                    }
+                                    @foreach (var item in Model.Delivery)
+                                    {
+                                    <option value="@item.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Name</font></font></option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">价格类型</font></font></label>                        
+                           
+                            <div class="col-md-8 class-edit">
+                                <select id="priceType" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                    @if (Model.Id == 0)
+                                    {
+                                    <option></option>
+                                    }
+                                    else
+                                    {
+                                        var PriceType = Model.PriceType.Where(p => p.Id == Model.PriceTypeId).FirstOrDefault();
+                                        if (PriceType != null)
+                                        {
+                                    <option value="@PriceType.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@PriceType.Value</font></font></option>
+                                    @(Model.PriceType.Remove(PriceType))
+                                        }
+                                        else
+                                        {
+                                    <option></option>
+                                        }
+                                    }
+                                    @foreach (var item in Model.PriceType)
+                                    {
+                                    <option value="@item.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Value</font></font></option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">联系人</font></font></label>
+                        <div class="col-md-8">
+                            <input type="text" id="contact" class="form-control  class-edit" value="@(Model.Id != 0 ? Model.CustomerName : "")">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">电话</font></font></label>
+                        <div class="col-md-8">
+                            <input type="text" id="mobile" class="form-control class-edit" value="@(Model.Id != 0 ? Model.CustomerPhone : "")">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">地址</font></font></label>
+                        <div class="col-md-8">
+                            <input type="text" id="address" class="form-control class-edit" value="@(Model.Id != 0 ? Model.AddressDetail : "")">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发票</font></font></label>
+
+                        <div class="col-md-8 class-edit">
+                            <select id="invoiceType" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                @if (Model.Id == 0)
+                                {
+                                    <option></option>
+                                }
+                                else
+                                {
+                                    var InvoiceTypes = Model.InvoiceTypes.Where(p => p.Value == ((int)Model.InvoiceType).ToString()).FirstOrDefault();
+                                    if (InvoiceTypes != null)
+                                    {
+                                        <option value="@InvoiceTypes.Value"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@InvoiceTypes.Text</font></font></option>
+                                            @Model.InvoiceTypes.Remove(InvoiceTypes);
+                                    }
+                                    else
+                                    {
+                                        <option></option>
+                                    }
+                                }
+                                @foreach (var item in Model.InvoiceTypes)
+                                {
+                                    <option value="@item.Value"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Text</font></font></option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">审核</font></font></label>                        
+                            
+                            <div class="col-md-8 class-edit">
+                                <select id="ap" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                    @if (Model.Id == 0)
+                                    {
+                                        <option></option>
+                                    }
+                                    else
+                                    {
+                                        var ApprovalProcessModel = Model.ApprovalProcessModel.Where(p => p.Id == Model.ApprovalProcessId).FirstOrDefault();
+                                        if (ApprovalProcessModel != null)
+                                        {
+                                            <option value="@ApprovalProcessModel.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@ApprovalProcessModel.Name</font></font></option>
+                                            @Model.ApprovalProcessModel.Remove(ApprovalProcessModel);
+                                        }
+                                        else
+                                        {
+                                            <option></option>
+                                        }
+                                    }
+                                    @foreach (var item in Model.ApprovalProcessModel)
+                                    {
+                                        <option value="@item.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Name</font></font></option>
+                                    }
+                                </select>
+                            </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">订单备注</font></font></label>
+                        <div class="col-md-8">
+                            <textarea id="descr" class="form-control  class-edit">@(Model.Id != 0 ? Model.CustomerMark : "")</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row  @(Model.Id != 0 &&Model.WriteBackState==WriteBackState.WriteShipSuccess? "" : "display-hide")">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">类型</font></font></label>
+                        <div class="md-radio-inline col-md-8">
+                            <div class="md-radio">
+                                <input type="radio" id="radio1" name="radio1" class="md-radiobtn" checked value="1">
+                                <label for="radio1">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 汇款
+                                </label>
+                            </div>
+                            <div class="md-radio">
+                                <input type="radio" id="radio2" name="radio1" class="md-radiobtn" value="2">
+                                <label for="radio2">
+                                    <span></span>
+                                    <span class="check"></span>
+                                    <span class="box"></span> 退款
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">总金额</font></font></label>
+                        <div class="col-md-8">
+                            <input id="sumPrice" disabled class="form-control  class-edit" value="@(Model.Id != 0 ? Model.SumPrice.ToString() : "")" />
+                        </div>
+                    </div>
+                </div>
+                
+            </div>
+            <div class="row @(Model.Id != 0 &&Model.WriteBackState==WriteBackState.WriteShipSuccess? "" : "display-hide")">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">付款方式</font></font></label>
+
+                        <div class="col-md-8 class-edit">
+                            <select id="payType" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                @if (Model.Id == 0)
+                                {
+                                    <option></option>
+                                }
+                                else
+                                {
+                                    var PayType = Model.PayTypes.Where(p => p.Id == Model.PayType).FirstOrDefault();
+                                    if (PayType != null)
+                                    {
+                                        <option value="@PayType.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@PayType.Value</font></font></option>
+                                        @Model.PayTypes.Remove(PayType);
+                                    }
+                                    else
+                                    {
+                                        <option></option>
+                                    }
+                                }
+                                @foreach (var item in Model.PayTypes)
+                                {
+                                    <option value="@item.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Value</font></font></option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">汇款方式</font></font></label>
+                        <div class="col-md-8 class-edit">
+                            <select id="payMentType" class="form-control select2" tabindex="-1" aria-hidden="true">
+                                @if (Model.Id == 0)
+                                {
+                                    <option></option>
+                                }
+                                else
+                                {
+                                    var PayType = Model.PayMentTypes.Where(p => p.Id == Model.PayMentType).FirstOrDefault();
+                                    if (PayType != null)
+                                    {
+                                        <option value="@PayType.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@PayType.Value</font></font></option>
+                                        @Model.PayTypes.Remove(PayType);
+                                    }
+                                    else
+                                    {
+                                        <option></option>
+                                    }
+                                }
+                                @foreach (var item in Model.PayMentTypes)
+                                {
+                                    <option value="@item.Id"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@item.Value</font></font></option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">已支付金额</font></font></label>
+                        <div class="col-md-8">
+                            <input id="paiedPrice" disabled class="form-control  class-edit" value="@(Model.Id != 0 ? Model.PayPrice.ToString() : "")"/>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">支付金额</font></font></label>
+                        <div class="col-md-8">
+                            <input id="payPrice" class="form-control  class-edit" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+           <div class="row @(Model.Id != 0 &&Model.WriteBackState==WriteBackState.WriteShipSuccess? "" : "display-hide")">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">物流单号</font></font></label>
+                        <div class="col-md-8">
+                            <input type="text" disabled id="deliveryNumber" class="form-control  class-edit" value="@(Model.Id != 0 ? Model.DeliveryNumber : "")">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发货时间</font></font></label>
+                        <div class="col-md-8">
+                            <input type="text" disabled id="deliveryDate" class="form-control class-edit" value="@(Model.Id != 0 ? (Model.DeliveryDate.HasValue? Model.DeliveryDate.Value.ToString("yyyy-MM-ddhh:mm:ss"):"" ): "")">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label class="control-label col-md-2"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">备注(操作)</font></font></label>
+                        <div class="col-md-8">
+                            <textarea id="mark" class="form-control  class-edit"></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           <div class="row">
+                    <div class="col-md-offset-3 col-md-9">
+                        <a href="javascript:;" onclick="@(Model.Id != 0 ? "edit(this)" : "submit1()")" class="btn btn-outline green button-next @((Model.CreatedBy == workContext.CurrentUser.Id)||Model.Id == 0 ? "" : "display-hide")">
+                            @Html.Raw(Model.Id != 0 ? "修&nbsp;改" : "保&nbsp;存")
+                            <i class="fa fa-pencil"></i>
+                        </a>
+                        <a  onclick="showInvoiceInfo()" id="invoice_info" style="margin-left:20px;" class="btn btn-outline yellow-gold button-submit @(Model.Id != 0 && Model.CreatedBy == workContext.CurrentUser.Id &&Model.InvoiceType!=InvoiceType.NoNeedInvoice? "" : "display-hide")">
+                            @Html.Raw(Model.Id != 0 ? "修改发票" : "添加发票")
+                            <i class="fa fa-file-o"></i>
+                        </a>
+                        <a  href="javascript:;" onclick="showProducts()" id="product_info" style="margin-left:20px;" class="btn btn-outline blue button-submit @(Model.Id != 0 && Model.CreatedBy == workContext.CurrentUser.Id? "" : "display-hide")">
+                            @Html.Raw(Model.Id != 0 ? "修改商品" : "选择商品")
+                            <i class="fa fa-qrcode"></i>
+                        </a>
+                        <a href="javascript:;" onclick="confirm(this)" style="margin-left:20px;" class="btn btn-outline purple @(Model.Id != 0 &&Model.State==OrderState.Confirmed? "" : "display-hide")">
+                            确&nbsp;认
+                            <i class="fa fa-check"></i>
+                        </a>
+                        <a href="javascript:;" onclick="approvalOrder(this)" style="margin-left:20px;" class="btn btn-outline yellow @(Model.Id != 0 && Model.SumPrice != 0 @*必须选择了商品才能显示审核*@   &&Model.State!=OrderState.returned && Model.Reviewer == workContext.CurrentUser.Id ? "" : "display-hide")">
+                            审&nbsp;核
+                            <i class="fa fa-check-circle"></i>
+                        </a>
+                        <a href="javascript:;" onclick="bookKeeping(this)" style="margin-left:20px;" class="btn btn-outline purple @(Model.Id != 0 && Model.WriteBackState ==WriteBackState.WriteShipSuccess? "" : "display-hide")">
+                            记&nbsp;账
+                            <i class="fa fa-check"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        <div class="modal-body order-product @(Model.Id != 0 && Model.SumPrice != 0 ? "" : " display-hide")">
+            <div class="col-md-6 col-sm-6" style="margin-bottom:10px;">
+                <div>
+                    <label>
+                        <input id="search" class="form-control input-sm input-small input-inline" placeholder="Search">
+                    </label>
+                    <button type="button"  onclick="showOrderProducts()"  class="btn green-haze btn-outline btn-circle btn-sm" style="margin-left:15px;">
+                        搜&nbsp;索
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-12">
+                <div class="portlet-body">
+                    <table class="table table-striped table-hover table-bordered">
+                        <thead>
+                            <tr>
+                                <th> 商品名称 </th>
+                                <th> 商品编码 </th>
+                                <th> 原价 </th>
+                                <th> 单价 </th>
+                                <th> 数量 </th>
+                                <th> 金额 </th>
+                                <th> 操作 </th>
+                            </tr>
+                        </thead>
+                        <tbody id="tbody2"></tbody>
+                    </table>
+                    <ul id="pageLimit2" style="float:right"></ul>
+                </div>
+            </div>
+        </div>
+    </form>
+
+</div>
+ <!-- 模态框（Modal） -->
+<div class="modal fade" id="productsModal" tabindex="-1" role="dialog"  aria-hidden="true">
+    <div class="modal-dialog" style="width:1000px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">商品选择</h4>
+            </div>
+            <div class="modal-body" style="height:550px;">
+                <div class="col-md-6 col-sm-6" style="margin-bottom:10px;">
+                    <div>
+                        <label>
+                            <input id="searchKey" class="form-control input-sm input-small input-inline" placeholder="Search">
+                        </label>
+                        <button type="button" onclick="selectProducts()" class="btn green-haze btn-outline btn-circle btn-sm" style="margin-left:15px;">
+                            搜&nbsp;索
+                        </button>
+                    </div>
+                </div>                
+                <div class="col-md-12">
+                    <div class="portlet-body">
+                        <table class="table table-striped table-hover table-bordered">
+                            <thead>
+                                <tr>
+                                    <th> 商品编号 </th>
+                                    <th> Name </th>
+                                    <th> NameEn </th>
+                                    <th> 操作 </th>
+                                </tr>
+                            </thead>
+                            <tbody id="tbody"></tbody>
+                        </table>
+                        <ul id="pageLimit" style="float:right"></ul>
+                    </div>
+                </div>
+                </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+<div id="stack2" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">商品信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="tab-pane">
+                        <div class="portlet box" style="border-bottom: 1px solid #5cd1db;">
+                            <div class="portlet-body form">
+                                <!-- BEGIN FORM-->
+                                <form action="#" class="form-horizontal">
+                                    <div class="form-body">
+                                        <div class="row">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-2">商品名称</label>
+                                                    <div class="col-md-10">
+                                                        <input type="hidden" id="order_product_id" />
+                                                        <p class="form-control-static" id="pName"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">商品编号</label>
+                                                    <div class="col-md-8">
+                                                        <p class="form-control-static" id="code"></p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4" id="priceName">标准价</label>
+                                                    <div class="col-md-8">
+                                                        <input type="number" id="order_product_orginPrice" readonly class="form-control" value="0">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">折扣</label>
+                                                    <div class="col-md-8">
+                                                        <input type="number" class="form-control" id="discount"  onblur="calculationPrice()" value="1.00">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">单价</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="order_product_price" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">数量</label>
+                                                    <div class="col-md-8">
+                                                        <input type="number" id="order_product_quantity" onblur="calculationSumPrice(this)" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">总金额</label>
+                                                    <div class="col-md-8">
+                                                        <input type="text" id="order_product_sumprice" class="form-control">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!--/span-->
+                                        </div>
+                                        <h5 class="form-section">库存信息</h5>
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">库存</label>
+                                                    <div class="col-md-8">
+                                                        <p class="form-control-static" id="stock">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">锁定库存</label>
+                                                    <div class="col-md-8">
+                                                        <p class="form-control-static" id="lockStock">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4">可售库存</label>
+                                                    <div class="col-md-8">
+                                                        <p class="form-control-static" id="availableStock">0</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END FORM-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" data-dismiss="modal" class="btn dark btn-outline">取消</button>
+                <button type="button" class="btn green" id="order_product_ok" onclick="submitOrderProduct()">确认</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="invoiceInfo" class="modal fade" tabindex="-1">
+    <div class="modal-dialog" style="width:800px;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">发票信息</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="tab-pane">
+                        <div class="portlet box">
+                            <div class="portlet-body form">
+                                <!-- BEGIN FORM-->
+                                <form action="#" class="form-horizontal">
+                                    <div class="form-body">
+
+                                        <h5 class="form-section" style="margin:0;">提示：个人发票填写收件邮箱及抬头，单位发票还需填写纳税人识别码，专用发票则需全部填写</h5>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">选择</font></font></label>
+                                                    <div class="md-radio-inline col-md-8">
+                                                        <div class="md-radio">
+                                                            <input type="radio" id="radio3" name="radio1" onclick="getDefaultInvoiceInfo(this)" class="md-radiobtn" value="1">
+                                                            <label for="radio3">
+                                                                <span></span>
+                                                                <span class="check"></span>
+                                                                <span class="box"></span> 默认
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发票接收邮箱</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="e_mail" class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.CustomerEmail : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发票抬头</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="title" class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.Title : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">纳税人识别码</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="taxpayerID" class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.TaxpayerID : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册地址</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="registerAddress" class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.RegisterAddress : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">注册电话</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="registerTel" class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.RegisterTel : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">开户银行</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="bankOfDeposit" class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.BankOfDeposit : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">银行账户</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="bankAccount" class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.BankAccount : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-md-9">
+                                                <div class="form-group">
+                                                    <label class="control-label col-md-4"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">发票号</font></font></label>
+                                                    <div class="col-md-8">
+                                                        <input id="invoiceNo" readonly class="form-control" value="@(Model.Id != 0 &Model.InvoiceInfoModel!=null ? Model.InvoiceInfoModel.InvoiceNo : "")" />
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row" style="margin-top:20px;">
+                                            <div class="col-md-9">
+                                                
+                                                <button type="button" data-dismiss="modal" class="btn dark btn-outline" style="margin-left:50%">取消</button>
+                                                <button type="button" class="btn green" id="order_product_ok" onclick="submitOrderInvoiceInfo()">保存</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                                <!-- END FORM-->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+<script src="~/Metronic/assets/global/plugins/bootstrap-paginator/src/bootstrap-paginator.js"></script>
+<script src="~/Script/Component/b2bComponent.js"></script>
+<script type="text/javascript">
+    $(function () {
+        showProducts1();
+        if (@Model.Id != 0) {
+            showOrderProducts(@Model.Id);
+            disabled();
+        }
+    })
+    var edit = function (e) {
+        disabled_hide();
+        $(e).attr("onclick", "editOrder(this)");
+        $(e).html("保&nbsp;存 <i class=\"fa fa-save\"></i>");
+    }
+    var editOrder = function (e) {
+
+        isContinue(function () {
+            submit1(true);
+            disabled();
+            $(e).attr("onclick", "edit(this)");
+            $(e).html("修&nbsp;改 <i class=\"fa fa-pencil\"></i>");
+        });
+    }
+    var disabled = function () {
+        $("#customer").attr("disabled", true);
+        $("#wareHouses").attr("disabled", true);
+        $("#delivery").attr("disabled", true);
+        $("#priceType").attr("disabled", true);
+        $("#ap").attr("disabled", true);
+        $("#contact").attr("readonly", true);
+        $("#mobile").attr("readonly", true);
+        $("#address").attr("readonly", true);
+        $("#descr").attr("disabled", true);
+        $("#invoiceType").attr("disabled", true);
+    }
+    var disabled_hide = function () {
+        $("#customer").attr("disabled", false);
+        $("#wareHouses").attr("disabled", false);
+        $("#delivery").attr("disabled", false);
+        $("#ap").attr("disabled", false);
+        $("#contact").attr("readonly", false);
+        $("#mobile").attr("readonly", false);
+        $("#address").attr("readonly", false);
+        $("#descr").attr("disabled", false);
+        $("#invoiceType").attr("disabled", false);
+    }
+    var showInvoiceInfo = function () {
+        $("#invoiceInfo").modal();
+    }
+    var showProducts = function () {
+        $("#productsModal").modal();
+    }
+    $("#searchKey").keydown(function (e) {
+        if (e.keyCode == 13) {
+            showProducts1();
+        }
+    });
+    $("#priceType").off().on("change", function () {
+        var customerId = $(this).val();
+        if (!(customerId == -1)) {
+            $("#priceName").text($("#priceType").select2("data")[0].text);
+        } else {
+            $("#priceName").text("标准价");
+        }
+    });
+
+    $("#customer").off().on("change", function () {
+        var customerId = $(this).val();
+        if (customerId > 0) {
+            $oms.ajax({
+                url: "/B2BOrder/SelectCustomer",
+                data: { customerId: customerId },
+                success: function (data) {
+                    if (data.isSucc) {
+                        $("#contact").val(data.data.contact);
+                        $("#mobile").val(data.data.mobile);
+                    }
+                }
+            });
+        } else {
+            $("#contact").val("");
+            $("#mobile").val("");
+        }
+    });
+
+</script>
+}

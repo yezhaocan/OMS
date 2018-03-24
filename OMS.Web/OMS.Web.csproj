@@ -1,0 +1,188 @@
+<Project Sdk="Microsoft.NET.Sdk.Web" ToolsVersion="15.0">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+    <UserSecretsId>c21be8c2-1e53-420a-b64d-a33e132c325f</UserSecretsId>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>2.0</OldToolsVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="log\**" />
+    <Compile Remove="wwwroot\Script\bootstrap-paginator\**" />
+    <Content Remove="log\**" />
+    <Content Remove="wwwroot\Script\bootstrap-paginator\**" />
+    <EmbeddedResource Remove="log\**" />
+    <EmbeddedResource Remove="wwwroot\Script\bootstrap-paginator\**" />
+    <None Remove="log\**" />
+    <None Remove="wwwroot\Script\bootstrap-paginator\**" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2.zip" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Scripts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\Metronic\assets\global\plugins\bootstrap-paginator\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\bootstrap-paginator\src\bootstrap-paginator.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\Contributing.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\resources\demo.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\resources\examples.php" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\resources\syntax\shCore.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\resources\syntax\Syntax Highlighter license" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\ids-arrays.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\ids-objects.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\jsonp.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\mysql.sql" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\objects.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\oracle.sql" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\post.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\postgres.sql" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\server_processing.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\sqlite.sql" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\sqlserver.sql" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\examples\server_side\scripts\ssp.class.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.bootstrap.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.bootstrap.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.bootstrap4.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.bootstrap4.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.foundation.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.foundation.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.jqueryui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.jqueryui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.semanticui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\autoFill.semanticui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\dataTables.autoFill.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\js\dataTables.autoFill.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\AutoFill\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\css\common.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\css\mixins.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.bootstrap.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.bootstrap.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.bootstrap4.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.bootstrap4.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.colVis.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.colVis.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.flash.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.flash.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.foundation.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.foundation.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.html5.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.html5.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.jqueryui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.jqueryui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.print.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.print.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.semanticui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\buttons.semanticui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\dataTables.buttons.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\js\dataTables.buttons.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Buttons\swf\flashExport.swf" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\ColReorder\js\dataTables.colReorder.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\ColReorder\js\dataTables.colReorder.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\ColReorder\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\bubble.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\datatable.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\datetime.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\envelope.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\fields.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\inline.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\lightbox.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\main.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\mixins.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\processing.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\css\scss\upload.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\dataTables.editor.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\dataTables.editor.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.bootstrap.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.bootstrap.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.bootstrap4.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.bootstrap4.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.foundation.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.foundation.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.jqueryui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.jqueryui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.semanticui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Editor-1.7.2\js\editor.semanticui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\editor\js\dataTables.editor.min - 2018-1-8.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\editor\js\dataTables.editor.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\editor\js\editor.bootstrap.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\editor\js\editor.bootstrap4.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\editor\js\editor.foundation.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\editor\js\editor.jqueryui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\editor\js\editor.semanticui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\FixedColumns\js\dataTables.fixedColumns.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\FixedColumns\js\dataTables.fixedColumns.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\FixedColumns\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\FixedHeader\js\dataTables.fixedHeader.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\FixedHeader\js\dataTables.fixedHeader.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\FixedHeader\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\KeyTable\js\dataTables.keyTable.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\KeyTable\js\dataTables.keyTable.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\KeyTable\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\dataTables.responsive.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\dataTables.responsive.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.bootstrap.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.bootstrap.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.bootstrap4.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.bootstrap4.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.foundation.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.foundation.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.jqueryui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.jqueryui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.semanticui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\js\responsive.semanticui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Responsive\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\RowGroup\js\dataTables.rowGroup.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\RowGroup\js\dataTables.rowGroup.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\RowGroup\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\RowReorder\css\semanticui.scss" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\RowReorder\js\dataTables.rowReorder.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\RowReorder\js\dataTables.rowReorder.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\RowReorder\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Scroller\examples\data\ssp.php" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Scroller\js\dataTables.scroller.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Scroller\js\dataTables.scroller.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Scroller\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Select\js\dataTables.select.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Select\js\dataTables.select.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\extensions\Select\Readme.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\ISSUE_TEMPLATE.md" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\images\Sorting icons.psd" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.bootstrap.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.bootstrap.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.bootstrap4.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.bootstrap4.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.foundation.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.foundation.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.jqueryui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.jqueryui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.material.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.material.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.semanticui.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.semanticui.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.uikit.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\dataTables.uikit.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\jquery.dataTables.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\jquery.dataTables.min.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\media\js\jquery.js" />
+    <None Include="wwwroot\Metronic\assets\global\plugins\DataTables-1.10.15\Readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.1" />
+    <PackageReference Include="NLog.Web.AspNetCore" Version="4.3.1" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OMS.Core\OMS.Core.csproj" />
+    <ProjectReference Include="..\OMS.Model\OMS.Model.csproj" />
+    <ProjectReference Include="..\OMS.Services\OMS.Services.csproj" />
+    <ProjectReference Include="..\OMS.WebCore\OMS.WebCore.csproj" />
+  </ItemGroup>
+</Project>

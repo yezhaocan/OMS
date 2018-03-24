@@ -1,0 +1,150 @@
+﻿
+@{
+    ViewData["Title"] = "CreatedProduct";
+}
+@section Styles{
+    <link href="~/Metronic/assets/global/plugins/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Metronic/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" type="text/css" />
+    @*<link href="~/Metronic/assets/global/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css" rel="stylesheet" type="text/css" />*@
+    <link href="~/Metronic/assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.css" rel="stylesheet" type="text/css" />
+    <link href="~/Metronic/assets/global/plugins/bootstrap-markdown/css/bootstrap-markdown.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Metronic/assets/global/plugins/bootstrap-modal/css/bootstrap-modal.css" rel="stylesheet" />
+}
+
+<div class="row">
+    <div class="col-md-12">
+        <div class="portlet light portlet-fit portlet-form bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <i class="icon-bubble font-green"></i>
+                    <span class="caption-subject font-green bold uppercase">新增商品</span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                @using (Html.BeginForm("CreatedProduct", "Product", FormMethod.Post, new { id = "product-form", @class = "form-horizontal" }))
+                {
+                    @Html.AntiForgeryToken()
+                    @*@Html.Partial("_CreateOrUpdateProduct",Model)*@
+                <div class="form-body">
+                    <div class="alert alert-danger display-hide">
+                        <button class="close" data-close="alert"></button> You have some form errors. Please check below.
+                    </div>
+                    <div class="alert alert-success display-hide">
+                        <button class="close" data-close="alert"></button> Your form validation is successful!
+                    </div>
+                    <div class="form-group  margin-top-20 vgroup">
+                        <label class="control-label col-md-3">
+                            中文名
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <div class="input-icon right">
+                                <input class="form-control vinput" type="type" id="Name" name="Name" value="" required />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            英文名
+                        </label>
+                        <div class="col-md-4">
+                            <div class="input-icon right">
+                                <i class="fa"></i>
+                                <input class="form-control vinput" type="type" id="NameEn" name="NameEn" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group vgroup">
+                        <label class="control-label col-md-3">
+                            商品编码
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            <input class="form-control vinput" type="type" id="Code" name="Code" value="" required />
+                        </div>
+                    </div>
+                    <div class="form-group vgroup">
+                        <label class="control-label col-md-3">
+                            商品类型
+                            <span class="required"> * </span>
+                        </label>
+                        <div class="col-md-4">
+                            @Html.DropDownList("Type", ViewBag.Types as SelectList, "请选择", new { @class = "form-control vinput", required = true })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            国家
+                        </label>
+                        <div class="col-md-4">
+                            @Html.DropDownList("Country", ViewBag.Country as SelectList, "请选择", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            产区
+                        </label>
+                        <div class="col-md-4">
+                            @Html.DropDownList("Area", ViewBag.Area as SelectList, "请选择", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            葡萄品种
+                        </label>
+                        <div class="col-md-4">
+                            @Html.DropDownList("Grapes", ViewBag.Grapes as SelectList, "请选择", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            容量
+                        </label>
+                        <div class="col-md-4">
+                            @Html.DropDownList("Capacity", ViewBag.Capacity as SelectList, "请选择", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            包装方式
+                        </label>
+                        <div class="col-md-4">
+                            @Html.DropDownList("Packing", ViewBag.Packing as SelectList, "请选择", new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-md-3">
+                            年份
+                        </label>
+                        <div class="col-md-4">
+                            <div class="input-icon right">
+                                <i class="fa"></i>
+                                <input class="form-control" type="type" id="year" name="year" value="" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="control-label col-md-3">
+
+                        </div>
+                        <div class="col-md-4">
+                            <div class="input-icon right">
+                                <input class="btn green" type="submit" name="name" value="添加" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    @*<script src="~/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modal.js"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap-modal/js/bootstrap-modalmanager.js"></script>*@
+    <script type="text/javascript" language="javascript">
+        $(function () {
+            $("#product-form").$validate();
+        })
+    </script>
+}

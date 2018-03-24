@@ -1,0 +1,49 @@
+﻿@model OMS.Data.Domain.WareHouse
+@{
+    ViewData["Title"] = "Detail";
+}
+<div class="container">
+    <div class="row">
+        <div class="portlet light form-fit bordered">
+            <div class="portlet-title">
+                <div class="caption">
+                    <span class="caption-subject font-green-haze bold uppercase"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">仓库详情</font></font></span>
+                </div>
+            </div>
+            <div class="portlet-body">
+                <form id="UpdateWHForm" action="/WareHouse/Detail" method="post" class="form-horizontal" style="width:430px">
+                    @Html.AntiForgeryToken()
+                    <div class="form-group vgroup">
+                        <label class="col-md-3 control-label">仓库名<span class="required" aria-required="true">*</span></label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.Id, new { hidden = true })
+                            @Html.TextBoxFor(model => model.Name, new { @class = "form-control vinput", required = true })
+                        </div>
+                    </div>
+                    <div class="form-group vgroup">
+                        <label class="col-md-3 control-label">仓库代码<span class="required" aria-required="true">*</span></label>
+                        <div class="col-md-9">
+                            @Html.TextBoxFor(model => model.DistrictId, new { @class = "form-control vinput", required = true, type = "number" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-3"></div>
+                        <div class="col-md-9">
+                            <input class="btn green" type="submit" name="name" value="提交" />
+                            &nbsp;&nbsp;
+                            @Html.ActionLink("删除", "Del", "WareHouse", new { id = Model.Id }, new { @class = "btn red", onclick = "javascript:return confirm('你确定要删除？')" })
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts{
+    <script type="text/javascript">
+    $().ready(function () {
+        $('#UpdateWHForm').$validate();
+    })
+    </script>
+
+}

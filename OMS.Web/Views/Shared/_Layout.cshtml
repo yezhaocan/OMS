@@ -1,0 +1,256 @@
+﻿
+@{ 
+    var CurrentUser = this.workContext.CurrentUser;
+    
+}
+<!DOCTYPE html>
+<!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
+<!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
+<!--[if !IE]><!-->
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1,IE=edge">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="~/Metronic/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/simple-line-icons/simple-line-icons.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/bootstrap-switch/css/bootstrap-switch.min.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/bootstrap-datetimepicker/css/bootstrap-datetimepicker.css" rel="stylesheet" />    
+    <link href="~/Metronic/assets/global/plugins/select2/css/select2.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/select2/css/select2-bootstrap.min.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/plugins/bootstrap-toastr/toastr.css" rel="stylesheet" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME GLOBAL STYLES -->
+    <link href="~/Metronic/assets/global/css/components.min.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/global/css/plugins.min.css" rel="stylesheet" />
+    <!-- END THEME GLOBAL STYLES -->
+    <!-- BEGIN THEME LAYOUT STYLES -->
+    <link href="~/Metronic/assets/layouts/layout/css/layout.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/layouts/layout/css/themes/darkblue.min.css" rel="stylesheet" />
+    <link href="~/Metronic/assets/layouts/layout/css/custom.min.css" rel="stylesheet" />
+    <!-- END THEME LAYOUT STYLES -->
+    <!--BEGIN Page Style-->
+    @RenderSection("Styles", required: false)
+    <!--END Page Style-->
+    @*<link rel="shortcut icon" href="favicon.ico" />*@
+</head>
+<body class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+
+    <div class="page-wrapper">
+        <!-- BEGIN HEADER -->
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner ">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+                    <a href="/Home/Index">
+                        <img src="~/Image/logo2.png" alt="logo" class="logo-default" />
+                    </a>
+                    <div class="menu-toggler sidebar-toggler">
+                        <span></span>
+                    </div>
+                </div>
+
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span></span>
+                </a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <li class="dropdown dropdown-user">
+                            <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <img alt="" class="img-circle" src="~/Image/0000723-200.jpg" />
+                                <span class="username username-hide-on-mobile"> @CurrentUser.UserName </span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-user"></i> 我的资料
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-envelope-open"></i> 我的事件
+                                        <span class="badge badge-danger"> 3 </span>
+                                    </a>
+                                </li>
+                                <li class="divider"> </li>
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-lock"></i> 锁定屏幕
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="#" id="logout">
+                                        <i class="icon-logout"></i> 退出系统
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                        <!-- BEGIN QUICK SIDEBAR TOGGLER -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <!-- BEGIN HEADER & CONTENT DIVIDER -->
+        <div class="clearfix"> </div>
+        <!-- END HEADER & CONTENT DIVIDER -->
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- BEGIN SIDEBAR -->
+                <div class="page-sidebar navbar-collapse collapse">
+                    <ul class="page-sidebar-menu  page-header-fixed" id="nav-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200" style="padding-top: 20px"></ul>
+                    <!-- END SIDEBAR MENU -->
+                    <!-- END SIDEBAR MENU -->
+                </div>
+                <!-- END SIDEBAR -->
+            </div>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <!-- BEGIN CONTENT BODY -->
+                <div class="page-content">
+                    <!-- BEGIN PAGE HEADER-->
+                    <!-- BEGIN PAGE BAR -->
+                    <div class="page-bar">
+                        <ul class="page-breadcrumb">
+                            <li>
+                                <a href="/Home/Index">Home</a>
+                                <i class="fa fa-circle"></i>
+                            </li>
+                        </ul>
+                        <button type="button" class="btn btn-default mt-ladda-btn ladda-button btn-circle" style="float: right;margin-top: 5px;margin-bottom: 5px;" data-style="expand-left" data-spinner-color="#333" onclick="javascript: history.back(-1);">
+                            <span class="ladda-label">
+                                <i class="icon-arrow-left"></i><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">&nbsp;&nbsp;返回</font></font>
+                            </span>
+                            <span class="ladda-spinner"></span><div class="ladda-progress" style="width: 0px;"></div>
+                        </button>
+                    </div>
+                    <!-- END PAGE BAR -->
+                    <!-- BEGIN PAGE INFO-->
+
+                    @RenderBody()
+                    <!-- END PAGE INFO-->
+                    <!-- END PAGE HEADER-->
+                </div>
+                <!-- END CONTENT BODY -->
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                2018 &copy; 红酒世界OMS系统 &nbsp;
+                <a target="_blank" href="http://www.wine-world.com/">红酒世界</a> &nbsp;|&nbsp;
+                <a target="_blank" href="http://mall.wine-world.com/">红酒世界网上商城</a>
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+    </div>
+    <!-- END QUICK NAV -->
+    <!--[if lt IE 9]>
+    <script src="~/Metronic/assets/global/plugins/respond.min.js"></script>
+    <script src="~/Metronic/assets/global/plugins/excanvas.min.js"></script>
+    <script src="~/Metronic/assets/global/plugins/ie8.fix.min.js"></script>
+    <![endif]-->
+    <!-- BEGIN CORE PLUGINS -->
+    <script src="~/Metronic/assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/global/plugins/js.cookie.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.js"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap-datetimepicker/js/locales/bootstrap-datetimepicker.zh-CN.js"></script>
+    <script src="~/Metronic/assets/global/scripts/app.js"></script>
+    <script src="~/Metronic/assets/global/plugins/select2/js/select2.full.js"></script>
+    <script src="~/Script/Component/select2Component.js"></script>
+    <script src="~/Metronic/assets/global/plugins/bootstrap-toastr/toastr.js"></script>
+    <script src="~/Script/Component/toastrComponent.js"></script>
+    <script src="~/Script/Component/modalsComponent.js"></script>
+    <script src="~/Metronic/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/global/plugins/jquery-validation/js/localization/messages_zh.js"></script>
+    <script src="~/Metronic/assets/global/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+    <!-- END CORE PLUGINS -->
+    <!-- BEGIN THEME GLOBAL SCRIPTS -->
+    <script src="~/Metronic/assets/global/scripts/app.min.js" type="text/javascript"></script>
+    <!-- END THEME GLOBAL SCRIPTS -->
+    <!-- BEGIN THEME LAYOUT SCRIPTS -->
+    <script src="~/Metronic/assets/layouts/layout/scripts/layout.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/layouts/layout/scripts/demo.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
+    <script src="~/Metronic/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
+    <!-- END THEME LAYOUT SCRIPTS -->
+    <script src="~/Script/tool/tool.js" asp-append-version="true"></script>
+    <script>
+        $(document).ready(function () {
+            renderMenu();
+            $('#logout').click(function () {
+                $oms.ajax({
+                    url: '/User/Logout',
+                    success: function (res) {
+                        if (res.isSucc) {
+                            window.location.href = '/User/Login';
+                        }
+                    }
+                });
+            });
+
+            App.setAssetsPath("../Metronic/assets/")
+        });
+        function renderMenu() {
+            $oms.ajax({
+                url: '/Menu/GetMenusList',
+                success: function (res) {
+                    if (!res.isSucc) {
+                        return;
+                    }
+                    var data = res.data;
+                    var htmlStr = '';
+                    var template = '<li class="nav-item"><a href="javascript:;" class="nav-link nav-toggle"><i class="{0}"></i>'
+                        + '<span class="title"> {1}</span><span class="arrow"></span></a><ul class="sub-menu">{2}</ul></li>';
+                    var childTemplate = '<li class="nav-item"><a href="{0}" class="nav-link"><i class="{1}"></i><span class="title"> {2}</span></a></li>';
+                    for (var i = 0; i < data.length; i++) {
+                        var row = data[i];
+                        var childs = row.childMenus;
+                        if (childs.length > 0) {
+                            var childStr = '';
+                            for (var j = 0; j < childs.length; j++) {
+                                var subRow = childs[j];
+                                childStr += childTemplate.format(subRow.url, subRow.icon, subRow.name);
+                            }
+                            htmlStr += template.format(row.icon, row.name, childStr);
+                        } else {
+                            htmlStr += childTemplate.format(row.url, row.icon, row.name);
+                        }
+                    }
+                    $('#nav-menu').append(htmlStr);
+                }
+            })
+        }
+    </script>
+    @Html.Partial("_Notifications")
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
