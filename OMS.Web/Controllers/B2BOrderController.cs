@@ -129,6 +129,19 @@ namespace OMS.Web.Controllers
             var data= _orderService.GetOrderListByType(orderModel,pageIndex, pageSize);
             return Success(data);
         }
+        [HttpPost]
+        public IActionResult SubmitApproval(int orderId)
+        {
+            var result = _orderService.SubmitApproval(orderId, out string msg);
+            if (result)
+            {
+                return Success();
+            }
+            else
+            {
+                return Error(msg);
+            }
+        }
         /// <summary>
         /// 审核
         /// </summary>

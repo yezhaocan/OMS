@@ -111,7 +111,7 @@ namespace OMS.Services.Order1
                     SerialNumber = orderModel.SerialNumber,
                     Type = OrderType.B2B,
                     ShopId=0,
-                    State=OrderState.ToBeConfirmed,
+                    State=OrderState.ToBeTurned,
                     WriteBackState=WriteBackState.NoWrite,
                     IsLocked=false,
                     LockStock=false,
@@ -193,7 +193,7 @@ namespace OMS.Services.Order1
                     orderApproval.Add(o);
                 }
             }
-            order.State = OrderState.ToBeConfirmed;//修改订单，需要重新待审核
+            order.State = OrderState.ToBeTurned;//修改订单，需要重新待审核
             if (order.LockStock)
             {
                 //如果锁定库存，需先释放库存
@@ -286,7 +286,7 @@ namespace OMS.Services.Order1
         private static string GetOrderType(OrderState orderState)
         {
             switch (orderState) {
-                case OrderState.ToBeTurned:return "待转单";
+                case OrderState.ToBeTurned:return "待转单/未提交";
                 case OrderState.ToBeConfirmed:return "待审核";
                 case OrderState.Confirmed:return "已审核";
                 case OrderState.FinancialConfirmation:return "财务已确认";
@@ -471,6 +471,38 @@ namespace OMS.Services.Order1
             _omsAccessor.SaveChanges();
             msg = "操作成功";
             return true;
+        }
+
+        public bool SubmitApproval(int orderId, out string msg)
+        {
+            var order = _omsAccessor.Get<Order>().Where(p=>p.Id==orderId&&p.Isvalid).Include(p=>p.InvoiceInfo).Include(p=>p.OrderProduct).FirstOrDefault();
+            if (order == null) {
+                msg = "提交审核失败，订单错误！";
+                return false;
+            }
+            if (order.State == OrderState.ToBeTurned)
+            {
+                if (order.InvoiceType != InvoiceType.NoNeedInvoice && order.InvoiceInfo == null) {
+
+                    msg = "提交审核失败，请先填写发票信息！";
+                    return false;
+                }
+                if (order.OrderProduct == null || order.OrderProduct.Count() == 0)
+                {
+                    msg = "提交审核失败，请先选择商品！";
+                    return false;
+                }
+
+                order.State = OrderState.ToBeConfirmed;
+                _omsAccessor.Update(order);
+                _omsAccessor.SaveChanges();
+                msg = "提交审核成功";
+                return true;
+            }
+            else {
+                msg = "该订单不能提交审核";
+                return false;
+            }
         }
         public bool DeleteOrder(int orderId, out string msg)
         {

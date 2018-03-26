@@ -59,16 +59,16 @@ namespace OMS.Services.Account
 
         public User CreateUser(User user)
         {
-            _omsAccessor.Insert<User>(user);
+            _omsAccessor.Insert(user);
             _omsAccessor.SaveChanges();
-            return _omsAccessor.Get<User>().Where(x => x.Isvalid && x.UserName == user.UserName).FirstOrDefault();
+            return user;
         }
 
         public User UpdateUser(User user)
         {
             _omsAccessor.Update(user);
             _omsAccessor.SaveChanges();
-            return _omsAccessor.Get<User>().Where(x => x.Isvalid && x.Id == user.Id).FirstOrDefault();
+            return user;
         }
 
         public void SoftDeleteUserRange(List<User> users)

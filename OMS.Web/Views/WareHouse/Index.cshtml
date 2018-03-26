@@ -46,9 +46,6 @@
     </div>
 
 </div>
-@section Styles{
-    <link href="~/Metronic/assets/global/plugins/DataTables-1.10.15/media/css/dataTables.bootstrap.min.css" rel="stylesheet" />
-}
 @section Scripts{
     <script src="~/Metronic/assets/global/plugins/datatables/datatables.min.js"></script>
     <script src="~/Metronic/assets/global/plugins/DataTables-1.10.15/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
@@ -73,6 +70,7 @@
                 "paging": false,
                 "Bootstrap": true,
             });
+            $("#WareHouseDataTable_filter").attr("class", "dataTables_filter  text-align-reverse");
         });
     </script>
 }

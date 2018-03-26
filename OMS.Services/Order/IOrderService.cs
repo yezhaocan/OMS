@@ -137,5 +137,12 @@ namespace OMS.Services.Order1
         /// </summary>
         /// <returns></returns>
         List<Delivery> GetAllDeliveryList();
+        /// <summary>
+        /// 提交审核
+        /// </summary>
+        /// <param name="orderId"></param>
+        /// <param name="msg"></param>
+        /// <returns></returns>
+        bool SubmitApproval(int orderId, out string msg);
     }
 }

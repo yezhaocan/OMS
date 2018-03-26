@@ -7,7 +7,7 @@ namespace OMS.Data.Domain
     public enum OrderState
     {
         /// <summary>
-        /// 待转单（B2C）
+        /// 待转单（B2B下单）
         /// </summary>
         ToBeTurned = 0,
         /// <summary>

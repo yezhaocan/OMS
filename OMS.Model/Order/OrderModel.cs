@@ -12,10 +12,11 @@ namespace OMS.Model
         public OrderModel()
         {
             InvoiceTypes = new List<SelectListItem>() {
-                new SelectListItem(){ Value="0",Text="不用发票" },
-                new SelectListItem(){ Value="1",Text="普通个人发票" },
-                new SelectListItem(){ Value="2",Text="普通单位发票" },
-                new SelectListItem(){ Value="3",Text="专用发票" }
+                new SelectListItem(){ Value="1",Text="不用发票" },
+                new SelectListItem(){ Value="2",Text="普通个人发票" },
+                new SelectListItem(){ Value="3",Text="普通单位发票" },
+                new SelectListItem(){ Value="4",Text="专用发票" }
+                //紧做前端展示需要，实际数据库存的值减1（-1）
             };
         }
         public string SerialNumber { get; set; }

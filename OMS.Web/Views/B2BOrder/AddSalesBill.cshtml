@@ -209,7 +209,7 @@
                                 }
                                 else
                                 {
-                                    var InvoiceTypes = Model.InvoiceTypes.Where(p => p.Value == ((int)Model.InvoiceType).ToString()).FirstOrDefault();
+                                    var InvoiceTypes = Model.InvoiceTypes.Where(p => (p.Value+1) == ((int)Model.InvoiceType).ToString()).FirstOrDefault();
                                     if (InvoiceTypes != null)
                                     {
                                         <option value="@InvoiceTypes.Value"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">@InvoiceTypes.Text</font></font></option>
@@ -413,7 +413,7 @@
             </div>
            <div class="row">
                     <div class="col-md-offset-3 col-md-9">
-                        <a href="javascript:;" onclick="@(Model.Id != 0 ? "edit(this)" : "submit1()")" class="btn btn-outline green button-next @((Model.CreatedBy == workContext.CurrentUser.Id)||Model.Id == 0 ? "" : "display-hide")">
+                        <a href="javascript:;" onclick="@(Model.Id != 0 ? "edit(this)" : "submit1()")" id="submit_id" class="btn btn-outline green button-next @((Model.CreatedBy == workContext.CurrentUser.Id)||Model.Id == 0 ? "" : "display-hide")">
                             @Html.Raw(Model.Id != 0 ? "修&nbsp;改" : "保&nbsp;存")
                             <i class="fa fa-pencil"></i>
                         </a>
@@ -424,6 +424,10 @@
                         <a  href="javascript:;" onclick="showProducts()" id="product_info" style="margin-left:20px;" class="btn btn-outline blue button-submit @(Model.Id != 0 && Model.CreatedBy == workContext.CurrentUser.Id? "" : "display-hide")">
                             @Html.Raw(Model.Id != 0 ? "修改商品" : "选择商品")
                             <i class="fa fa-qrcode"></i>
+                        </a>
+                        <a href="javascript:;" onclick="submitApproval(this)" id="submit_info" style="margin-left:20px;" class="btn btn-outline blue button-submit @(Model.Id != 0 && Model.CreatedBy == workContext.CurrentUser.Id &&Model.State==OrderState.ToBeTurned? "" : "display-hide")">
+                           提交审核
+                            <i class="fa fa-check-circle"></i>
                         </a>
                         <a href="javascript:;" onclick="confirm(this)" style="margin-left:20px;" class="btn btn-outline purple @(Model.Id != 0 &&Model.State==OrderState.Confirmed? "" : "display-hide")">
                             确&nbsp;认

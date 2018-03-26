@@ -76,10 +76,11 @@ var submit1 = function (ismotify) {
         alertWarn("请选择审核流程");
         return false;
     }
-    if (!(invoiceTypeId > 0)) {
+    if (!(invoiceTypeId >= 0)) {
         alertWarn("请选择发票类型");
         return false;
     }
+    OrderModel.InvoiceType = invoiceTypeId - 1;//发票类型0为不需要发票，这个插件不能使用为0的值，或者是读取的时候没办法判断value是默认还是0
     if (isMotify) {
         OrderModel.Id = parseInt($("#orderId").val());
         $oms.ajax({
@@ -88,6 +89,7 @@ var submit1 = function (ismotify) {
             success: function (data) {
                 if (data.isSucc) {
                     alertSuccess("修改成功");
+                    edit("#submit_id");
                     if (invoiceTypeId != 0) {
                         $("#invoice_info").removeClass("display-hide");
                     }
@@ -106,6 +108,8 @@ var submit1 = function (ismotify) {
                 if (data.isSucc) {
                     alertSuccess("保存成功")
                     $("#product_info").removeClass("display-hide");
+                    $("#submit_info").removeClass("display-hide");
+                    edit("#submit_id");
                     if (invoiceTypeId != 0) {
                         $("#invoice_info").removeClass("display-hide");
                     }
@@ -430,6 +434,28 @@ var confirm = function (e) {
         })
     }, null, "确认当前订单！", null, "确认", null, null);
 }
+var submitApproval = function (e) {
+    var orderId = $("#orderId").val();
+    var that = e;
+    isContinue(function () {
+        //通过执行方法
+        $oms.ajax({
+            url: "/B2BOrder/SubmitApproval",
+            data: { orderId: orderId},
+            success: function (data) {
+                if (data.isSucc) {
+                    alertSuccess("提交成功");
+                    $(that).addClass("display-hide");
+                }
+                else {
+                    alertError(data.msg);
+                }
+            }
+
+        })
+    }, null, "确认提交审核！", null, "确认", null, null);
+}
+
 var bookKeeping = function () {
     var orderId = parseInt($("#orderId").val());
     var payType = parseInt($("#payType").select2("data")[0].id);

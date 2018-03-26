@@ -1,4 +1,4 @@
-﻿@model List<OMS.Data.Domain.Customers>
+﻿@model IEnumerable<OMS.Data.Domain.Customers>
 @{
     ViewData["Title"] = "客户管理";
 }
@@ -31,19 +31,19 @@
                             </thead>
                             <tbody>
                                 @foreach (var item in Model)
-                    {
-                        <tr role="row" class="odd">
-                            <td>@Html.DisplayFor(modleitem => item.Dictionary.Value) </td>
-                            <td>@Html.DisplayFor(modleitem => item.Name)</td>
-                            <td>@Html.DisplayFor(modleitem => item.Mobile)</td>
-                            <td>@Html.DisplayFor(modelitem => item.Email)</td>
-                            <td>@Html.DisplayFor(modelitem => item.Mark)</td>
-                            <td>
-                                @Html.ActionLink("详情", "Detail", "Customer", new { id = item.Id })
-                            </td>
-                        </tr>
+                                {
+                                    <tr role="row" class="odd">
+                                        <td>@Html.DisplayFor(modleitem => item.Dictionary.Value) </td>
+                                        <td>@Html.DisplayFor(modleitem => item.Name)</td>
+                                        <td>@Html.DisplayFor(modleitem => item.Mobile)</td>
+                                        <td>@Html.DisplayFor(modelitem => item.Email)</td>
+                                        <td>@Html.DisplayFor(modelitem => item.Mark)</td>
+                                        <td>
+                                            @Html.ActionLink("详情", "Detail", "Customer", new { id = item.Id })
+                                        </td>
+                                    </tr>
 
-        }
+                                }
                             </tbody>
                         </table>
                     </div>
@@ -52,11 +52,9 @@
         </div>
     </div>
 </div>
-@section Styles{
-    <link href="~/Metronic/assets/global/plugins/datatables/datatables.min.css" rel="stylesheet" />
-}
 @section Scripts{
     <script src="~/Metronic/assets/global/plugins/datatables/datatables.min.js"></script>
+    <script src="~/Metronic/assets/global/plugins/DataTables-1.10.15/media/js/dataTables.bootstrap.js" type="text/javascript"></script>
     <script type="text/javascript">
         $().ready(function () {
             //$("#sample_editable_1_filter input").attr("class", "form-control input-sm input-small input-inline");
@@ -73,9 +71,12 @@
                         "sLast": "末页"
                     },
                     "sZeroRecords": "没有匹配结果",
-                    "sInfoFiltered":"(由 _MAX_ 项结果过滤)",
-                }
+                    "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+                },
+                "Bootstrap": true,
             });
+            $("#ProductsTable_filter").attr("class", "dataTables_filter  text-align-reverse");
+            $("#ProductsTable_paginate").attr("class", "dataTables_paginate paging_simple_numbers text-align-reverse")
         });
     </script>
 }
